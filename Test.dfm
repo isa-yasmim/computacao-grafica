@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = '-'
-  ClientHeight = 825
-  ClientWidth = 1215
+  ClientHeight = 955
+  ClientWidth = 1068
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,19 +14,9 @@ object Form1: TForm1
   Scaled = False
   OnDblClick = FormDblClick
   TextHeight = 15
-  object Label1: TLabel
-    Left = 72
-    Top = 63
-    Width = 66
-    Height = 15
-    Caption = 'CLICK HERE!'
-    Color = clWhite
-    ParentColor = False
-    OnClick = Label1Click
-  end
   object Mundo: TLabel
     Left = 72
-    Top = 120
+    Top = 33
     Width = 3
     Height = 15
     Margins.Left = 4
@@ -36,7 +26,7 @@ object Form1: TForm1
   end
   object Viewport: TLabel
     Left = 72
-    Top = 150
+    Top = 63
     Width = 3
     Height = 15
     Margins.Left = 4
@@ -88,6 +78,20 @@ object Form1: TForm1
     Margins.Bottom = 4
     Caption = 'X MIN - MAX'
   end
+  object Label1: TLabel
+    Left = 60
+    Top = 724
+    Width = 961
+    Height = 15
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 
+      'Operacoes de poligono ------------------------------------------' +
+      '----------------------------------------------------------------' +
+      '-------------------------------------------------------------'
+  end
   object Panel1: TPanel
     Left = 272
     Top = 39
@@ -105,8 +109,8 @@ object Form1: TForm1
     end
   end
   object Button1: TButton
-    Left = 72
-    Top = 416
+    Left = 80
+    Top = 613
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -143,8 +147,8 @@ object Form1: TForm1
     TabOrder = 3
   end
   object Inicia: TButton
-    Left = 72
-    Top = 492
+    Left = 80
+    Top = 391
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -295,7 +299,7 @@ object Form1: TForm1
   end
   object RadioGroup_TipoReta: TRadioGroup
     Left = 72
-    Top = 188
+    Top = 148
     Width = 121
     Height = 197
     Margins.Left = 4
@@ -311,8 +315,8 @@ object Form1: TForm1
     TabOrder = 15
   end
   object edx: TEdit
-    Left = 52
-    Top = 592
+    Left = 60
+    Top = 778
     Width = 151
     Height = 23
     Margins.Left = 4
@@ -324,8 +328,8 @@ object Form1: TForm1
     Text = 'edx'
   end
   object edy: TEdit
-    Left = 52
-    Top = 640
+    Left = 60
+    Top = 826
     Width = 151
     Height = 23
     Margins.Left = 4
@@ -337,8 +341,8 @@ object Form1: TForm1
     Text = 'edy'
   end
   object Translacao: TButton
-    Left = 72
-    Top = 679
+    Left = 80
+    Top = 865
     Width = 94
     Height = 31
     Margins.Left = 4

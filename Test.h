@@ -14,7 +14,6 @@
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-	TLabel *Label1;
 	TPanel *Panel1;
 	TImage *Image1;
 	TLabel *Mundo;
@@ -41,6 +40,7 @@ __published:	// IDE-managed Components
 	TEdit *edx;
 	TEdit *edy;
 	TButton *Translacao;
+	TLabel *Label1;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
