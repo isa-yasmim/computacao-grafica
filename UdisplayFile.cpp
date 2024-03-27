@@ -6,7 +6,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-void DisplayFile::desenha(TCanvas *Canvas, Janela mundo, Janela vp){
+void DisplayFile::desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta){
 	//configura a caneta pra se escrever
 	Canvas->Brush->Color = clRed;
 	Canvas->FillRect(Rect(0,0,500,500));
@@ -15,7 +15,7 @@ void DisplayFile::desenha(TCanvas *Canvas, Janela mundo, Janela vp){
 	Canvas->Pen->Width = 3;
 
 	for (int i = 0; i < poligonos.size(); i++) {
-		poligonos[i].desenha(Canvas, mundo, vp);
+		poligonos[i].desenha(Canvas, mundo, vp, tipoReta);
 	}
 }
 

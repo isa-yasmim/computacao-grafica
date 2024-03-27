@@ -37,6 +37,10 @@ __published:	// IDE-managed Components
 	TButton *right;
 	TButton *Zoom_in;
 	TButton *Zoom_out;
+	TRadioGroup *RadioGroup_TipoReta;
+	TEdit *edx;
+	TEdit *edy;
+	TButton *Translacao;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
@@ -51,6 +55,7 @@ __published:	// IDE-managed Components
 	void __fastcall downClick(TObject *Sender);
 	void __fastcall Zoom_inClick(TObject *Sender);
 	void __fastcall Zoom_outClick(TObject *Sender);
+	void __fastcall TranslacaoClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

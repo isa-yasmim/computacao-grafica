@@ -78,7 +78,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
     display.poligonos.push_back(pol);
 	pol.pontos.clear();
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
     display.mostra(Form1->ListBox_Poligonos);
 }
@@ -137,7 +137,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	display.poligonos[1].pontos[0].x = mundo.xMin;
 	display.poligonos[1].pontos[1].x = mundo.xMax;
 
-    display.desenha(Form1->Image1->Canvas, mundo, vp);
+    display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
 }
 //---------------------------------------------------------------------------
@@ -169,7 +169,7 @@ void __fastcall TForm1::Image1MouseDown(TObject *Sender, TMouseButton Button, TS
 			yW = yVp_Mundo(Y, mundo, vp);
 
 			pol.pontos.push_back(Ponto(xW, yW));
-			pol.desenha(Image1->Canvas, mundo, vp);
+			pol.desenha(Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 		}
 		else {
             //clicar com o botao da direita vai armazenar os pontos no poligono e desenhar no canvas
@@ -179,8 +179,8 @@ void __fastcall TForm1::Image1MouseDown(TObject *Sender, TMouseButton Button, TS
 				display.poligonos.push_back(pol);
 				pol.pontos.clear();
 				inicia = false;
-				display.desenha(Form1->Image1->Canvas, mundo, vp);
-                display.mostra(Form1->ListBox_Poligonos);
+				display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+				display.mostra(Form1->ListBox_Poligonos);
 			}
         }
 	}
@@ -209,7 +209,7 @@ void __fastcall TForm1::upClick(TObject *Sender)
 
 	atualizaMundo(mundo);
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 
@@ -222,7 +222,7 @@ void __fastcall TForm1::leftClick(TObject *Sender)
 
 	atualizaMundo(mundo);
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 
@@ -234,7 +234,7 @@ void __fastcall TForm1::rightClick(TObject *Sender)
 
 	atualizaMundo(mundo);
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 
@@ -246,7 +246,7 @@ void __fastcall TForm1::downClick(TObject *Sender)
 
 	atualizaMundo(mundo);
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 
@@ -260,7 +260,7 @@ void __fastcall TForm1::Zoom_inClick(TObject *Sender)
 
     atualizaMundo(mundo);
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 
@@ -274,8 +274,32 @@ void __fastcall TForm1::Zoom_outClick(TObject *Sender)
 
     atualizaMundo(mundo);
 
-	display.desenha(Form1->Image1->Canvas, mundo, vp);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TForm1::TranslacaoClick(TObject *Sender)
+{
+	double dx, dy;
+
+	try {
+		dx = StrToFloat(edx->Text);
+		dy = StrToFloat(edy->Text);
+	} catch (...) {
+		ShowMessage("Erro ao converter para float");
+		return;
+	}
+
+	if (ListBox_Poligonos->ItemIndex == -1) {
+		ShowMessage("Nenhum Poligono selecionado");
+        return;
+	}
+
+	display.poligonos[ListBox_Poligonos->ItemIndex].translacao(dx, dy);
+
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+}
+//---------------------------------------------------------------------------
 

@@ -25,3 +25,8 @@ int Ponto::yWVp(Janela mundo, Janela vp){
 AnsiString Ponto::mostraPonto(){
     return "(" + FloatToStr(x) + "," + FloatToStr(y) + ")";
 }
+
+void Ponto::translacao(double dx, double dy){
+	x += dx;
+    y += dy;
+}

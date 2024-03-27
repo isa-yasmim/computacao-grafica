@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = '-'
   ClientHeight = 825
   ClientWidth = 1215
   Color = clWhite
@@ -292,5 +292,62 @@ object Form1: TForm1
     DisabledImageName = 'Zoom_out'
     TabOrder = 14
     OnClick = Zoom_outClick
+  end
+  object RadioGroup_TipoReta: TRadioGroup
+    Left = 72
+    Top = 188
+    Width = 121
+    Height = 197
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Line type'
+    ItemIndex = 0
+    Items.Strings = (
+      'LineTo'
+      'DDA'
+      'Bresenham')
+    TabOrder = 15
+  end
+  object edx: TEdit
+    Left = 52
+    Top = 592
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'Japanese'
+    TabOrder = 16
+    Text = 'edx'
+  end
+  object edy: TEdit
+    Left = 52
+    Top = 640
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'edy'
+    TabOrder = 17
+    Text = 'edy'
+  end
+  object Translacao: TButton
+    Left = 72
+    Top = 679
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Translacao'
+    DisabledImageName = 'Translacao'
+    TabOrder = 18
+    OnClick = TranslacaoClick
   end
 end
