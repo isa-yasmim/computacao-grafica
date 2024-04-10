@@ -15,5 +15,10 @@ class DisplayFile{
 		void desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta);
 
 		void mostra(TListBox *listbox);
+
+		void clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c);
+
+        void adicionarPol(Poligono pol);
+
 };
 #endif

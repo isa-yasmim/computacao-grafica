@@ -17,7 +17,11 @@ class Ponto{
 
 		AnsiString mostraPonto();
 
-        void translacao(double dx, double dy);
+		void translacao(double dx, double dy);
+
+		int getRegionCode(Janela clipping);
+
+		void clipLine(Janela c, double m, int rcode);
 };
 
 #endif

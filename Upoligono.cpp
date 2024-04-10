@@ -16,7 +16,20 @@ void Poligono::desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta){
 
 	//LineTo
 	if (tipoReta == 0) {
-		int xvp, yvp;
+		desenhaLine(Canvas, mundo, vp);
+	}
+	//DDA
+	if (tipoReta == 1) {
+		desenhaDDA(Canvas, mundo, vp);
+	}
+	//BRESENHAM
+	if (tipo == 2) {
+		desenhaBre(Canvas, mundo, vp);
+	}
+}
+
+void Poligono::desenhaLine(TCanvas *Canvas, Janela mundo, Janela vp){
+	int xvp, yvp;
 
 		for (int i = 0; i < pontos.size(); i++) {
 
@@ -31,15 +44,6 @@ void Poligono::desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta){
 				Canvas->LineTo(xvp, yvp);
 			}
 		}
-	}
-	//DDA
-	if (tipoReta == 1) {
-		desenhaDDA(Canvas, mundo, vp);
-	}
-	//BRESENHAM
-	if (tipo == 2) {
-		desenhaBre(Canvas, mundo, vp);
-	}
 }
 
 void Poligono::desenhaDDA(TCanvas *Canvas, Janela mundo, Janela vp){
@@ -84,6 +88,53 @@ void Poligono::desenhaBre(TCanvas *Canvas, Janela mundo, Janela vp){
 	Ponto p1, p2;
 }
 
+Poligono Poligono::CohenSutherland(Janela c){
+
+    Poligono aux;
+	std::vector<Ponto> clippedPoints;
+	double m = 0;
+	Util util;
+
+	  for (int i = 0; i < pontos.size() - 1; i++) {
+		Ponto p1 = pontos[i];
+		Ponto p2 = pontos[i + 1];
+
+		int code1 = p1.getRegionCode(c);
+		int code2 = p2.getRegionCode(c);
+
+		clippedPoints.clear();
+
+		// Totalmente visivel
+		if (code1 == 0 && code2 == 0) {
+		  clippedPoints.push_back(p1);
+		  clippedPoints.push_back(p2);
+		  continue;
+		}
+
+		// Parcialmente visivel
+		else if ((code1 & code2) == 0) {
+			m = util.media(p1, p2);
+
+			  if (code1 != 0) {
+				p1.clipLine(c, m, code1);
+			  }
+
+			  if (code2 != 0) {
+				p2.clipLine(c, m, code2);
+			  }
+
+			  clippedPoints.push_back(p1);
+
+			  if (p1.x != p2.x && p1.y != p2.y) {
+				clippedPoints.push_back(p2);
+			  }
+		}
+	  }
+
+	  aux.pontos = clippedPoints;
+      return aux;
+}
+
 void Poligono::mostra(TListBox *listbox){
 	listbox->Items->Add(IntToStr(id) + " - " + tipo + " - " + IntToStr((int)pontos.size()));
 }
@@ -101,6 +152,17 @@ void Poligono::translacao(double dx, double dy){
 	for (int i = 0; i < pontos.size(); i++) {
 		pontos[i].translacao(dx, dy);
 	}
+}
+
+bool Poligono::isEqual(Poligono pol){
+
+	int cont = 0;
+
+	if (tipo == pol.tipo && id == pol.id) {
+        return true;
+	}
+
+    return false;
 }
 
 /*Ponto central

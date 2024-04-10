@@ -9,7 +9,10 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "Uponto.h"
 #include "Ujanela.h"
+#include "Upoligono.h"
+#include "UdisplayFile.h"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -41,8 +44,8 @@ __published:	// IDE-managed Components
 	TEdit *edy;
 	TButton *Translacao;
 	TLabel *Label1;
+	TButton *Clipping;
 	void __fastcall FormDblClick(TObject *Sender);
-	void __fastcall Label1Click(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall ListBox_PoligonosClick(TObject *Sender);
@@ -56,6 +59,7 @@ __published:	// IDE-managed Components
 	void __fastcall Zoom_inClick(TObject *Sender);
 	void __fastcall Zoom_outClick(TObject *Sender);
 	void __fastcall TranslacaoClick(TObject *Sender);
+	void __fastcall ClippingClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

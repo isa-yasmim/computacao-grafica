@@ -354,4 +354,18 @@ object Form1: TForm1
     TabOrder = 18
     OnClick = TranslacaoClick
   end
+  object Clipping: TButton
+    Left = 80
+    Top = 462
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Clipping'
+    DisabledImageName = 'Clipping'
+    TabOrder = 19
+    OnClick = ClippingClick
+  end
 end

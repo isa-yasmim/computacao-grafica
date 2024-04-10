@@ -4,10 +4,6 @@
 #pragma hdrstop
 
 #include "Test.h"
-#include "Uponto.h"
-#include "Ujanela.h"
-#include "Upoligono.h"
-#include "UdisplayFile.h"
 
 Ponto aux;
 Poligono pol;
@@ -15,6 +11,7 @@ DisplayFile display;
 
 Janela mundo(-250,-250,250,250);
 Janela vp(0,0,500,500);
+Janela clipping(-100, -100, 100, 100);
 
 bool inicia = false;
 
@@ -70,7 +67,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	display.poligonos.push_back(pol);
 	pol.pontos.clear();
 
-    pol.id = contId++;
+	pol.id = contId++;
 	pol.tipo = 'E';
 	pol.pontos.push_back(Ponto(mundo.xMax, 0));
 	pol.pontos.push_back(Ponto(mundo.xMin, 0));
@@ -89,13 +86,6 @@ void __fastcall TForm1::FormDblClick(TObject *Sender)
 		Form1->Color = clGreen;
 	else
 		Form1->Color = clRed;
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::Label1Click(TObject *Sender)
-{
-	Application->NormalizeTopMosts();
-	Application->MessageBox(L"This should be on top.", L"HELLO", MB_OKCANCEL);
-	Application->RestoreTopMosts();
 }
 //---------------------------------------------------------------------------
 
@@ -137,6 +127,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	display.poligonos[1].pontos[0].x = mundo.xMin;
 	display.poligonos[1].pontos[1].x = mundo.xMax;
 
+	display.mostra(Form1->ListBox_Poligonos);
     display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
 }
@@ -199,6 +190,8 @@ void TForm1::atualizaMundo(Janela mundo){
 	display.poligonos[0].pontos[1].y = mundo.yMin;
 	display.poligonos[1].pontos[0].x = mundo.xMin;
 	display.poligonos[1].pontos[1].x = mundo.xMax;
+
+	display.mostra(ListBox_Poligonos);
 }
 
 void __fastcall TForm1::upClick(TObject *Sender)
@@ -300,6 +293,14 @@ void __fastcall TForm1::TranslacaoClick(TObject *Sender)
 	display.poligonos[ListBox_Poligonos->ItemIndex].translacao(dx, dy);
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ClippingClick(TObject *Sender)
+{
+	display.clipping(Form1->Image1->Canvas, mundo, vp, clipping);
+    display.mostra(ListBox_Poligonos);
+
 }
 //---------------------------------------------------------------------------
 
