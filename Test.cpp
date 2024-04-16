@@ -58,39 +58,12 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	aux.x = 0;
 	aux.y = mundo.yMax;*/
 
-	//coloca os pontos no poligono pol para desenhar o eixo y
-	pol.id = contId++;
-    pol.tipo = 'E';
-	pol.pontos.push_back(Ponto(0, mundo.yMax));
-	pol.pontos.push_back(Ponto(0, mundo.yMin));
-
-	display.poligonos.push_back(pol);
-	pol.pontos.clear();
-
-	pol.id = contId++;
-	pol.tipo = 'E';
-	pol.pontos.push_back(Ponto(mundo.xMax, 0));
-	pol.pontos.push_back(Ponto(mundo.xMin, 0));
-
-	display.poligonos.push_back(pol);
-	pol.pontos.clear();
-
-	//LIMITE DO CLIPPING
-	pol.id = contId++;
-	pol.tipo = 'P';
-	pol.pontos.push_back(Ponto(clipping.xMin, clipping.yMax));
-	pol.pontos.push_back(Ponto(clipping.xMax, clipping.yMax));
-
-	pol.pontos.push_back(Ponto(clipping.xMax, clipping.yMin));
-	pol.pontos.push_back(Ponto(clipping.xMin, clipping.yMin));
-	pol.pontos.push_back(Ponto(clipping.xMin, clipping.yMax));
-
-    display.poligonos.push_back(pol);
-	pol.pontos.clear();
+	display.eixo(Form1->Image1->Canvas, mundo, vp, clipping);
+	contId = 3;
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
-    display.mostra(Form1->ListBox_Poligonos);
+	display.mostra(Form1->ListBox_Poligonos);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormDblClick(TObject *Sender)
@@ -125,7 +98,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 	ShowMessage(IntToStr(x) + "," + IntToStr(y));
 
-    ListBox_Poligonos->Items->Clear();
+	ListBox_Poligonos->Items->Clear();
 	ListBox_Poligonos->Items->Add(Ponto(10,10).mostraPonto());*/
 
 	//atualiza o tamanho do mundo
@@ -141,7 +114,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	display.poligonos[1].pontos[1].x = mundo.xMax;
 
 	display.mostra(Form1->ListBox_Poligonos);
-    display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
 }
 //---------------------------------------------------------------------------
@@ -314,6 +287,18 @@ void __fastcall TForm1::ClippingClick(TObject *Sender)
 	display.clipping(Form1->Image1->Canvas, mundo, vp, clipping);
     display.mostra(ListBox_Poligonos);
 
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ClearClick(TObject *Sender)
+{
+	display.poligonos.clear();
+	contId = 3;
+
+	display.eixo(Form1->Image1->Canvas, mundo, vp, clipping);
+
+    display.mostra(Form1->ListBox_Poligonos);
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 }
 //---------------------------------------------------------------------------
 

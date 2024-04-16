@@ -45,6 +45,7 @@ __published:	// IDE-managed Components
 	TButton *Translacao;
 	TLabel *Label1;
 	TButton *Clipping;
+	TButton *Clear;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);
@@ -60,6 +61,7 @@ __published:	// IDE-managed Components
 	void __fastcall Zoom_outClick(TObject *Sender);
 	void __fastcall TranslacaoClick(TObject *Sender);
 	void __fastcall ClippingClick(TObject *Sender);
+	void __fastcall ClearClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

@@ -368,4 +368,18 @@ object Form1: TForm1
     TabOrder = 19
     OnClick = ClippingClick
   end
+  object Clear: TButton
+    Left = 208
+    Top = 39
+    Width = 41
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'X'
+    DisabledImageName = 'Clear'
+    TabOrder = 20
+    OnClick = ClearClick
+  end
 end

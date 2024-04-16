@@ -89,3 +89,39 @@ void DisplayFile::adicionarPol(Poligono pol){
 		poligonos.push_back(pol);
 	}
 }
+
+void DisplayFile::eixo(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
+
+	Poligono pol;
+	int contId = 0;
+
+	//coloca os pontos no poligono pol para desenhar o eixo y
+	pol.id = contId++;
+	pol.tipo = 'E';
+	pol.pontos.push_back(Ponto(0, mundo.yMax));
+	pol.pontos.push_back(Ponto(0, mundo.yMin));
+
+	poligonos.push_back(pol);
+	pol.pontos.clear();
+
+	pol.id = contId++;
+	pol.tipo = 'E';
+	pol.pontos.push_back(Ponto(mundo.xMax, 0));
+	pol.pontos.push_back(Ponto(mundo.xMin, 0));
+
+	poligonos.push_back(pol);
+	pol.pontos.clear();
+
+	//LIMITE DO CLIPPING
+	pol.id = contId++;
+	pol.tipo = 'P';
+	pol.pontos.push_back(Ponto(c.xMin, c.yMax));
+	pol.pontos.push_back(Ponto(c.xMax, c.yMax));
+
+	pol.pontos.push_back(Ponto(c.xMax, c.yMin));
+	pol.pontos.push_back(Ponto(c.xMin, c.yMin));
+	pol.pontos.push_back(Ponto(c.xMin, c.yMax));
+
+	poligonos.push_back(pol);
+	pol.pontos.clear();
+}

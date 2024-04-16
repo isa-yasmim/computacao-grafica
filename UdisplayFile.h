@@ -18,7 +18,9 @@ class DisplayFile{
 
 		void clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c);
 
-        void adicionarPol(Poligono pol);
+		void adicionarPol(Poligono pol);
+
+		void eixo(TCanvas *canvas, Janela mundo, Janela vp, Janela c);
 
 };
 #endif
