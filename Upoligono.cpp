@@ -102,12 +102,17 @@ Poligono Poligono::CohenSutherland(Janela c){
 		int code1 = p1.getRegionCode(c);
 		int code2 = p2.getRegionCode(c);
 
-		clippedPoints.clear();
-
 		// Totalmente visivel
 		if (code1 == 0 && code2 == 0) {
+
 		  clippedPoints.push_back(p1);
-		  clippedPoints.push_back(p2);
+
+
+		  if (p1.x != p2.x && p1.y != p2.y) {
+		  	clippedPoints.push_back(p2);
+		  }
+
+
 		  continue;
 		}
 

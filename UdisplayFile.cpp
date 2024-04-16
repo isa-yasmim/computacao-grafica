@@ -48,7 +48,7 @@ void DisplayFile::clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
 	canvas->Pen->Width = 3;
 
 	//define os poligonos a serem desenhados
-	for (int i = 2; i < poligonos.size(); i++) {
+	for (int i = 3; i < poligonos.size(); i++) {
 		if (poligonos[i].tipo != 'H') {
 
 			aux = poligonos[i].CohenSutherland(c);

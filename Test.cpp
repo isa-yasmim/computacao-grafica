@@ -72,6 +72,19 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	pol.pontos.push_back(Ponto(mundo.xMax, 0));
 	pol.pontos.push_back(Ponto(mundo.xMin, 0));
 
+	display.poligonos.push_back(pol);
+	pol.pontos.clear();
+
+	//LIMITE DO CLIPPING
+	pol.id = contId++;
+	pol.tipo = 'P';
+	pol.pontos.push_back(Ponto(clipping.xMin, clipping.yMax));
+	pol.pontos.push_back(Ponto(clipping.xMax, clipping.yMax));
+
+	pol.pontos.push_back(Ponto(clipping.xMax, clipping.yMin));
+	pol.pontos.push_back(Ponto(clipping.xMin, clipping.yMin));
+	pol.pontos.push_back(Ponto(clipping.xMin, clipping.yMax));
+
     display.poligonos.push_back(pol);
 	pol.pontos.clear();
 
