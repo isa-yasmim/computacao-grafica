@@ -19,3 +19,10 @@ float Util::media(Ponto p1, Ponto p2){
 	return res;
 }
 
+double Util::sign(double a){
+	if (a < 0) {
+		return -1;
+	}
+	else
+        return 1;
+}

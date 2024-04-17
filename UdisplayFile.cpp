@@ -23,7 +23,10 @@ void DisplayFile::desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta
 			Canvas->Pen->Color = clYellow;
 			Canvas->Pen->Width = 3;
 		}
-
+		if (poligonos[i].tipo == 'C' || poligonos[i].tipo == 'G') {
+			poligonos[i].desenhaC(Canvas, mundo, vp);
+		}
+        else
 		poligonos[i].desenha(Canvas, mundo, vp, tipoReta);
 	}
 }
@@ -47,11 +50,11 @@ void DisplayFile::clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
 	canvas->Pen->Color = clYellow;
 	canvas->Pen->Width = 3;
 
-	//define os poligonos a serem desenhados
+	//define os poligonos a serem desenhados - NAO CIRCUNFERENCIA
 	for (int i = 3; i < poligonos.size(); i++) {
-		if (poligonos[i].tipo != 'H') {
+		if (poligonos[i].tipo != 'H' && poligonos[i].tipo != 'G' && poligonos[i].tipo != 'C') {
 
-			aux = poligonos[i].CohenSutherland(c);
+				aux = poligonos[i].CohenSutherland(c);
 
 			if (aux.pontos.size() > 0) {
 				poligonosAux.push_back(aux);
@@ -59,7 +62,7 @@ void DisplayFile::clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
 		}
 	}
 
-    for (int i = 0; i < poligonosAux.size(); i++) {
+	for (int i = 0; i < poligonosAux.size(); i++) {
 
 		//desenha o poligono que vai popular
 		poligonosAux[i].desenha(canvas, mundo, vp, 0);
@@ -67,6 +70,32 @@ void DisplayFile::clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
 		poligonosAux[i].id = contId++;
 		poligonosAux[i].tipo = 'H';
 		adicionarPol(poligonosAux[i]);  //da push_back se nao existe o poligono
+
+	}
+
+	poligonosAux.clear();
+
+	//define os poligonos a serem desenhados - CIRCUNFERENCIA
+
+    for (int i = 3; i < poligonos.size(); i++) {
+		if (poligonos[i].tipo != 'H' && poligonos[i].tipo != 'G' && poligonos[i].tipo != 'N') {
+
+				aux = poligonos[i].clipCircunferencia(c);
+
+			if (aux.pontos.size() > 0) {
+				poligonosAux.push_back(aux);
+			}
+		}
+	}
+
+	for (int i = 0; i < poligonosAux.size(); i++) {
+
+		poligonosAux[i].id = contId++;
+		poligonosAux[i].tipo = 'G';
+		adicionarPol(poligonosAux[i]);  //da push_back se nao existe o poligono
+
+        //desenha o poligono
+		poligonosAux[i].desenhaC(canvas, mundo, vp);
 
 	}
 

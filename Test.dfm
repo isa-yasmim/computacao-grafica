@@ -1,4 +1,4 @@
-object Form1: TForm1
+﻿object Form1: TForm1
   Left = 0
   Top = 0
   Caption = '-'
@@ -299,7 +299,7 @@ object Form1: TForm1
   end
   object RadioGroup_TipoReta: TRadioGroup
     Left = 72
-    Top = 148
+    Top = 156
     Width = 121
     Height = 197
     Margins.Left = 4
@@ -356,7 +356,7 @@ object Form1: TForm1
   end
   object Clipping: TButton
     Left = 80
-    Top = 462
+    Top = 513
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -381,5 +381,19 @@ object Form1: TForm1
     DisabledImageName = 'Clear'
     TabOrder = 20
     OnClick = ClearClick
+  end
+  object Circunferência: TButton
+    Left = 80
+    Top = 449
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Circunfer'#234'ncia'
+    DisabledImageName = 'Circunfer'#234'ncia'
+    TabOrder = 21
+    OnClick = CircunferênciaClick
   end
 end

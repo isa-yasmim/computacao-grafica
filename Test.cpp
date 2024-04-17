@@ -14,6 +14,7 @@ Janela vp(0,0,500,500);
 Janela clipping(-100, -100, 100, 100);
 
 bool inicia = false;
+bool iniciacirc = false;
 
 double xVp_Mundo(int xVp, Janela mundo, Janela vp){
 	return ((xVp - vp.xMin) / (vp.xMax - vp.xMin)) * (mundo.xMax - mundo.xMin) + mundo.xMin;
@@ -138,6 +139,33 @@ void __fastcall TForm1::Image1MouseDown(TObject *Sender, TMouseButton Button, TS
           int X, int Y)
 {
 	double xW, yW;
+
+	if (inicia && iniciacirc) {
+		ShowMessage("Não é possível fazer uma circunferência e um polígono ao mesmo tempo.");
+		inicia = false;
+		iniciacirc = false;
+	}
+
+	if (iniciacirc) {
+		if (Button == mbLeft) {
+			xW = xVp_Mundo(X, mundo, vp);
+			yW = yVp_Mundo(Y, mundo, vp);
+
+			pol.pontos.push_back(Ponto(xW, yW));
+			pol.criarCircunferencia(xW, yW, 45);
+
+            pol.id = contId++;
+			pol.tipo = 'C';
+			display.poligonos.push_back(pol);
+			pol.pontos.clear();
+
+			iniciacirc = false;
+
+            display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+			display.mostra(Form1->ListBox_Poligonos);
+
+		}
+	}
 
 	if (inicia) {
         //clicar com o botao da esquerda vai criar um ponto novo no poligono auxiliar
@@ -299,6 +327,14 @@ void __fastcall TForm1::ClearClick(TObject *Sender)
 
     display.mostra(Form1->ListBox_Poligonos);
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TForm1::CircunferênciaClick(TObject *Sender)
+{
+    iniciacirc = true;
 }
 //---------------------------------------------------------------------------
 

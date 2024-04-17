@@ -13,6 +13,7 @@
 #include "Ujanela.h"
 #include "Upoligono.h"
 #include "UdisplayFile.h"
+#include <Vcl.ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -46,6 +47,7 @@ __published:	// IDE-managed Components
 	TLabel *Label1;
 	TButton *Clipping;
 	TButton *Clear;
+	TButton *Circunferência;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);
@@ -62,6 +64,7 @@ __published:	// IDE-managed Components
 	void __fastcall TranslacaoClick(TObject *Sender);
 	void __fastcall ClippingClick(TObject *Sender);
 	void __fastcall ClearClick(TObject *Sender);
+	void __fastcall CircunferênciaClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

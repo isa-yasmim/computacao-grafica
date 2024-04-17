@@ -13,7 +13,8 @@ DIFERENTES TIPOS
 E = EIXO
 N = POLIGONO NORMAL
 C = CIRCUNFERENCIA
-H = POLIGONO CLIPPADO
+G = CIRCUNFERENCIA CLIPADA
+H = POLIGONO CLIPADO
 P = PARAMETROS
 */
 
@@ -32,7 +33,13 @@ class Poligono{
 
 		void desenhaBre(TCanvas *Canvas, Janela mundo, Janela vp);
 
+		void desenhaC(TCanvas *Canvas, Janela mundo, Janela vp);
+
+		void criarCircunferencia(double xc, double yc, double r);
+
 		Poligono CohenSutherland(Janela c);
+
+        Poligono clipCircunferencia(Janela c);
 
 		void mostra(TListBox *listbox);
 
@@ -41,6 +48,8 @@ class Poligono{
 		void translacao(double dx, double dy);
 
 		bool isEqual(Poligono pol);
+
+        void quadrantes(double xc, double yc, double x, double y);
 
 };
 #endif
