@@ -128,9 +128,20 @@ void Ponto::rotacaoH(double angulo, Ponto pc){
 
 }
 
-void Ponto::reflexao(){
-	x *= (-1);
-    y *= (-1);
+void Ponto::reflexao(TRadioGroup *Eixo){
+
+	if (Eixo->ItemIndex == 0) {
+		x *= (-1);
+	}
+	if (Eixo->ItemIndex == 1) {
+		y *= (-1);
+	}
+	if (Eixo->ItemIndex == 2) {
+		x *= (-1);
+		y *= (-1);
+	}
+
+    return;
 }
 
 int Ponto::getRegionCode(Janela c){

@@ -5,10 +5,6 @@
 #include "Upoligono.h"
 #include "Uponto.h"
 #include "Ujanela.h"
-#include <vector>
-#include <Vcl.Forms.hpp>
-#include <cstdlib>
-#include <cmath>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -329,10 +325,10 @@ void Poligono::rotacaoH(double angulo){
 	}
 }
 
-void Poligono::reflexao(){
+void Poligono::reflexao(TRadioGroup *Eixo){
 
 	for (int i = 0; i < pontos.size(); i++) {
-		pontos[i].reflexao();
+		pontos[i].reflexao(Eixo);
 	}
 
 }

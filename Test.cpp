@@ -420,7 +420,7 @@ void __fastcall TForm1::rotacaoHomoClick(TObject *Sender)
 
 void __fastcall TForm1::ReflexaoClick(TObject *Sender)
 {
-	display.poligonos[ListBox_Poligonos->ItemIndex].reflexao;
+	display.poligonos[ListBox_Poligonos->ItemIndex].reflexao(Eixo);
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 

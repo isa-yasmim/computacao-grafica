@@ -438,7 +438,7 @@
   end
   object Reflexao: TButton
     Left = 272
-    Top = 894
+    Top = 887
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -451,7 +451,7 @@
     OnClick = ReflexaoClick
   end
   object dx: TEdit
-    Left = 508
+    Left = 626
     Top = 762
     Width = 151
     Height = 23
@@ -464,8 +464,8 @@
     Text = 'dx'
   end
   object dy: TEdit
-    Left = 684
-    Top = 762
+    Left = 626
+    Top = 805
     Width = 151
     Height = 23
     Margins.Left = 4
@@ -477,8 +477,8 @@
     Text = 'dy'
   end
   object dz: TEdit
-    Left = 853
-    Top = 762
+    Left = 626
+    Top = 851
     Width = 151
     Height = 23
     Margins.Left = 4
@@ -490,8 +490,8 @@
     Text = 'dz'
   end
   object Translacaod: TButton
-    Left = 617
-    Top = 797
+    Left = 825
+    Top = 762
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -503,8 +503,8 @@
     TabOrder = 29
   end
   object Escalonamentod: TButton
-    Left = 784
-    Top = 801
+    Left = 825
+    Top = 805
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -528,5 +528,22 @@
     DisabledImageName = 'rotacaoHomo'
     TabOrder = 31
     OnClick = rotacaoHomoClick
+  end
+  object Eixo: TRadioGroup
+    Left = 453
+    Top = 762
+    Width = 121
+    Height = 156
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Eixo'
+    ItemIndex = 0
+    Items.Strings = (
+      'X'
+      'Y'
+      'XY')
+    TabOrder = 32
   end
 end

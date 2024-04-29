@@ -7,6 +7,9 @@
 #include "Util.h"
 #include <vector>
 #include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <cstdlib>
+#include <cmath>
 
 /*
 DIFERENTES TIPOS
@@ -58,7 +61,7 @@ class Poligono{
 
 		void rotacaoH(double angulo);
 
-        void reflexao();
+		void reflexao(TRadioGroup *Eixo);
 
         //GERAIS
 		bool isEqual(Poligono pol);

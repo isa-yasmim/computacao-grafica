@@ -58,6 +58,7 @@ __published:	// IDE-managed Components
 	TButton *Translacaod;
 	TButton *Escalonamentod;
 	TButton *rotacaoHomo;
+	TRadioGroup *Eixo;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);

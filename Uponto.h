@@ -6,6 +6,7 @@
 #include "Ujanela.h"
 #include <Vcl.Controls.hpp> //AnsiString
 #include <cmath> //Pi
+#include <Vcl.ExtCtrls.hpp>
 class Ponto{
 	public:
 		double x, y;
@@ -26,7 +27,7 @@ class Ponto{
 
 		void rotacaoH(double angulo, Ponto pc);
 
-        void reflexao();
+        void reflexao(TRadioGroup *Eixo);
 
 		int getRegionCode(Janela clipping);
 
