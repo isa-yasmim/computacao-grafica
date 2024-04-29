@@ -3,6 +3,8 @@
 #ifndef UtilH
 #define UtilH
 #include "Uponto.h"
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.h>
 //---------------------------------------------------------------------------
 #endif
 
@@ -13,6 +15,8 @@ class Util {
 
 		float media(Ponto p1, Ponto p2);
 
-        double sign(double a);
+		double sign(double a);
+
+		void validate(TListBox *listbox, TEdit *Edit, double x);
 
 };

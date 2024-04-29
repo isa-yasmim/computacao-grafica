@@ -306,6 +306,29 @@ void Poligono::translacao(double dx, double dy){
 	}
 }
 
+void Poligono::escalonamento(double dx, double dy){
+    for (int i = 0; i < pontos.size(); i++) {
+		pontos[i].escalonamento(dx, dy);
+	}
+}
+
+void Poligono::rotacao(double angulo){
+    for (int i = 0; i < pontos.size(); i++) {
+		pontos[i].rotacao(angulo);
+	}
+}
+
+void Poligono::rotacaoH(double angulo){
+
+	Ponto pc;
+
+    pc = pontoCentral(pc);
+
+    for (int i = 0; i < pontos.size(); i++) {
+		pontos[i].rotacaoH(angulo, pc);
+	}
+}
+
 bool Poligono::isEqual(Poligono pol){
 
 	int cont = 0;
@@ -328,9 +351,7 @@ void Poligono::quadrantes(double xc, double yc, double x, double y){
 	pontos.push_back(Ponto(xc + y, yc + x));
 }
 
-/*void pontoCentral(){
-	Ponto pc;
-
+Ponto Poligono::pontoCentral(Ponto pc){
 	for (int i = 0; i < pontos.size(); i++){
 		pc.x += pontos[i].x;
 		pc.y += pontos[i].y;
@@ -338,12 +359,6 @@ void Poligono::quadrantes(double xc, double yc, double x, double y){
 
 	pc.x = pc.x / pontos.size();
 	pc.y = pc.y / pontos.size();
+
+    return pc;
 }
-*/
-
-/*
-	for (int l = 1; l<= m; l++)
-		for (int c = 1; c <= k; c++)
-			C(l,c) = 0;
-
-*/

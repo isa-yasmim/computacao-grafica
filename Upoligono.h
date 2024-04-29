@@ -47,9 +47,17 @@ class Poligono{
 
 		void translacao(double dx, double dy);
 
+		void escalonamento(double dx, double dy);
+
+		void rotacao(double angulo);
+
+		void rotacaoH(double angulo);
+
 		bool isEqual(Poligono pol);
 
-        void quadrantes(double xc, double yc, double x, double y);
+		void quadrantes(double xc, double yc, double x, double y);
+
+		Ponto pontoCentral(Ponto pc);
 
 };
 #endif

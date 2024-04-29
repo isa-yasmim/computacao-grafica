@@ -26,3 +26,17 @@ double Util::sign(double a){
 	else
         return 1;
 }
+
+void Util::validate(TListBox *listbox, TEdit *Edit, double x){
+	try {
+		x = StrToFloat(Edit->Text);
+	} catch (...) {
+		ShowMessage("Erro ao converter para float");
+		return;
+	}
+
+    if (listbox->ItemIndex == -1) {
+		ShowMessage("Nenhum Poligono selecionado");
+        return;
+	}
+}

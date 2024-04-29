@@ -48,6 +48,16 @@ __published:	// IDE-managed Components
 	TButton *Clipping;
 	TButton *Clear;
 	TButton *Circunferência;
+	TButton *Escalonamento;
+	TButton *Rotação;
+	TEdit *angulo;
+	TButton *Reflexao;
+	TEdit *dx;
+	TEdit *dy;
+	TEdit *dz;
+	TButton *Translacaod;
+	TButton *Escalonamentod;
+	TButton *rotacaoHomo;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);
@@ -65,6 +75,9 @@ __published:	// IDE-managed Components
 	void __fastcall ClippingClick(TObject *Sender);
 	void __fastcall ClearClick(TObject *Sender);
 	void __fastcall CircunferênciaClick(TObject *Sender);
+	void __fastcall RotaçãoClick(TObject *Sender);
+	void __fastcall EscalonamentoClick(TObject *Sender);
+	void __fastcall rotacaoHomoClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

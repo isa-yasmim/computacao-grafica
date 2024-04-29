@@ -1,7 +1,7 @@
 ﻿object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = '-'
+  Caption = 'angulo'
   ClientHeight = 955
   ClientWidth = 1068
   Color = clWhite
@@ -12,7 +12,6 @@
   Font.Style = []
   Position = poDesigned
   Scaled = False
-  OnDblClick = FormDblClick
   TextHeight = 15
   object Mundo: TLabel
     Left = 72
@@ -316,7 +315,7 @@
   end
   object edx: TEdit
     Left = 60
-    Top = 778
+    Top = 762
     Width = 151
     Height = 23
     Margins.Left = 4
@@ -329,7 +328,7 @@
   end
   object edy: TEdit
     Left = 60
-    Top = 826
+    Top = 801
     Width = 151
     Height = 23
     Margins.Left = 4
@@ -342,7 +341,7 @@
   end
   object Translacao: TButton
     Left = 80
-    Top = 865
+    Top = 847
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -395,5 +394,138 @@
     DisabledImageName = 'Circunfer'#234'ncia'
     TabOrder = 21
     OnClick = CircunferênciaClick
+  end
+  object Escalonamento: TButton
+    Left = 80
+    Top = 894
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Escalonamento'
+    DisabledImageName = 'Escalonamento'
+    TabOrder = 22
+    OnClick = EscalonamentoClick
+  end
+  object Rotação: TButton
+    Left = 272
+    Top = 801
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Rota'#231#227'o'
+    DisabledImageName = 'Rota'#231#227'o'
+    TabOrder = 23
+    OnClick = RotaçãoClick
+  end
+  object angulo: TEdit
+    Left = 252
+    Top = 762
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'angulo'
+    TabOrder = 24
+    Text = 'angulo'
+  end
+  object Reflexao: TButton
+    Left = 272
+    Top = 894
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Reflexao'
+    DisabledImageName = 'Reflexao'
+    TabOrder = 25
+  end
+  object dx: TEdit
+    Left = 508
+    Top = 762
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'dx'
+    TabOrder = 26
+    Text = 'dx'
+  end
+  object dy: TEdit
+    Left = 684
+    Top = 762
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'dy'
+    TabOrder = 27
+    Text = 'dy'
+  end
+  object dz: TEdit
+    Left = 853
+    Top = 762
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'dz'
+    TabOrder = 28
+    Text = 'dz'
+  end
+  object Translacaod: TButton
+    Left = 617
+    Top = 797
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Translacao'
+    DisabledImageName = 'Translacaod'
+    TabOrder = 29
+  end
+  object Escalonamentod: TButton
+    Left = 784
+    Top = 801
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Escalonamento'
+    DisabledImageName = 'Escalonamento'
+    TabOrder = 30
+  end
+  object rotacaoHomo: TButton
+    Left = 272
+    Top = 848
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Rota'#231#227'o Homo'
+    DisabledImageName = 'rotacaoHomo'
+    TabOrder = 31
+    OnClick = rotacaoHomoClick
   end
 end
