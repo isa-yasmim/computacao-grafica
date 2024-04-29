@@ -5,6 +5,7 @@
 //---------------------------------------------------------------------------
 #include "Ujanela.h"
 #include <Vcl.Controls.hpp> //AnsiString
+#include <cmath> //Pi
 class Ponto{
 	public:
 		double x, y;
@@ -18,6 +19,14 @@ class Ponto{
 		AnsiString mostraPonto();
 
 		void translacao(double dx, double dy);
+
+		void escalonamento(double dx, double dy);
+
+		void rotacao(double angulo);
+
+		void rotacaoH(double angulo, Ponto pc);
+
+        void reflexao();
 
 		int getRegionCode(Janela clipping);
 

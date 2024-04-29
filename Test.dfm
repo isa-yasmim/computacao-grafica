@@ -448,6 +448,7 @@
     Caption = 'Reflexao'
     DisabledImageName = 'Reflexao'
     TabOrder = 25
+    OnClick = ReflexaoClick
   end
   object dx: TEdit
     Left = 508

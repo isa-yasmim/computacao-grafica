@@ -17,6 +17,6 @@ class Util {
 
 		double sign(double a);
 
-		void validate(TListBox *listbox, TEdit *Edit, double x);
+		bool validate(TListBox *listbox, TEdit *Edit, double x);
 
 };

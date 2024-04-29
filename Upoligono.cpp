@@ -329,6 +329,14 @@ void Poligono::rotacaoH(double angulo){
 	}
 }
 
+void Poligono::reflexao(){
+
+	for (int i = 0; i < pontos.size(); i++) {
+		pontos[i].reflexao();
+	}
+
+}
+
 bool Poligono::isEqual(Poligono pol){
 
 	int cont = 0;

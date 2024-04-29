@@ -78,6 +78,7 @@ __published:	// IDE-managed Components
 	void __fastcall RotaçãoClick(TObject *Sender);
 	void __fastcall EscalonamentoClick(TObject *Sender);
 	void __fastcall rotacaoHomoClick(TObject *Sender);
+	void __fastcall ReflexaoClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

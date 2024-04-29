@@ -25,6 +25,7 @@ class Poligono{
 		char tipo;
 		std::vector<Ponto> pontos;
 
+        //DESENHA
 		void desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta);
 
 		void desenhaLine(TCanvas *Canvas, Janela mundo, Janela vp);
@@ -35,16 +36,20 @@ class Poligono{
 
 		void desenhaC(TCanvas *Canvas, Janela mundo, Janela vp);
 
+		//CIRCUNFERENCIA
 		void criarCircunferencia(double xc, double yc, double r);
 
+		//CLIPPING
 		Poligono CohenSutherland(Janela c);
 
         Poligono clipCircunferencia(Janela c);
 
+		//SHOW
 		void mostra(TListBox *listbox);
 
 		void mostraPontos(TListBox *listbox);
 
+		//TRANSFORMACOES
 		void translacao(double dx, double dy);
 
 		void escalonamento(double dx, double dy);
@@ -53,6 +58,9 @@ class Poligono{
 
 		void rotacaoH(double angulo);
 
+        void reflexao();
+
+        //GERAIS
 		bool isEqual(Poligono pol);
 
 		void quadrantes(double xc, double yc, double x, double y);
