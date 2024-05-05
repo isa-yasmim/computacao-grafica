@@ -366,3 +366,107 @@ Ponto Poligono::pontoCentral(Ponto pc){
 
     return pc;
 }
+
+Poligono Poligono::curva(int tipoCurva){
+
+	Poligono pol;
+
+	if (tipoCurva == 0) {
+		if (pontos.size() == 4) {
+			pol = bSpline();
+			return pol;
+		}
+	}
+	if (tipoCurva == 1) {
+		if (pontos.size() == 4) {
+			pol = hermite();
+			return pol;
+		}
+	}
+	if (tipoCurva == 2) {
+		if (pontos.size() == 4) {
+			pol = bezier();
+            return pol;
+		}
+	}
+	if (tipoCurva == 3) {
+		if (pontos.size() == 3) {
+			pol = casteljau();
+		}
+		return pol;
+	}
+
+    return pol;
+}
+
+Poligono Poligono::bSpline(){
+	Ponto aux;
+	Poligono result;
+	for(double t = 0; t < 1; t+= 0.01){
+		double t2 = t*t;
+		double t3 = t2*t;
+		aux.x = pontos[0].x + 4 * pontos[1].x + pontos[2].x -  pontos[0].x * t3 + 3 * pontos[1].x * t3 - 3 * pontos[2].x * t3 + pontos[3].x * t3 + 3 * pontos[0].x * t2 - 6 * pontos[1].x * t2 + 3 * pontos[2].x * t2 - 3 * pontos[0].x * t+ 3 * pontos[2].x * t;
+		aux.y = pontos[0].y + 4 * pontos[1].y + pontos[2].y -  pontos[0].y * t3 + 3 * pontos[1].y * t3 - 3 * pontos[2].y * t3 + pontos[3].y * t3 + 3 * pontos[0].y * t2 - 6 * pontos[1].y * t2 + 3 * pontos[2].y * t2 - 3 * pontos[0].y * t+ 3 * pontos[2].y * t;
+		aux.x /= 6;
+		aux.y /= 6;
+		result.pontos.push_back(aux);
+	}
+	return result;
+}
+
+Poligono Poligono::hermite(){
+}
+
+Poligono Poligono::bezier(){
+}
+
+Poligono Poligono::casteljau() {
+
+	Ponto P1, P2, P3;
+
+	P1 = pontos[0];
+	P2 = pontos[1];
+	P3 = pontos[2];
+
+	Poligono aux;
+
+	aux.pontos.push_back(P1);
+
+	casteljauB(P1, P2, P3, &aux);
+
+    return aux;
+
+}
+
+void Poligono::casteljauB(Ponto P1, Ponto P2, Ponto P3, Poligono *aux){
+
+	double dist = sqrt(pow(P3.x - P1.x, 2) + pow(P3.y - P1.y, 2));
+
+	if (dist < 3) {
+		aux->pontos.push_back(P3);
+	}
+	else{
+		Ponto A, B, C;
+
+		A.medio(P1, P2);
+		B.medio(P2, P3);
+		C.medio(A, B);
+
+		/*
+		A.x = floor((P2.x + P1.x) / 2);
+		A.y = floor((P2.y + P1.y) / 2);
+
+		B.x = floor((P3.x + P2.x) / 2);
+		B.y = floor((P3.y + P2.y) / 2);
+
+		C.x = floor((B.x + A.x) / 2);
+		C.y = floor((B.y + A.y) / 2);
+        */
+
+		casteljauB(P1, A, C, aux);
+		casteljauB(C, B, P3, aux);
+
+		aux->pontos.push_back(P3);
+    }
+
+}

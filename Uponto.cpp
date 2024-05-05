@@ -213,3 +213,9 @@ void Ponto::clipLine(Janela c, double m, int rcode){
 	}
 }
 
+void Ponto::medio(Ponto P1, Ponto P2){
+
+	x = floor((P2.x + P1.x) / 2);
+	y = floor((P2.y + P1.y) / 2);
+
+}

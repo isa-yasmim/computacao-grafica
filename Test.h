@@ -44,7 +44,7 @@ __published:	// IDE-managed Components
 	TEdit *edx;
 	TEdit *edy;
 	TButton *Translacao;
-	TLabel *Label1;
+	TLabel *Operacoes_pol;
 	TButton *Clipping;
 	TButton *Clear;
 	TButton *Circunferência;
@@ -59,6 +59,11 @@ __published:	// IDE-managed Components
 	TButton *Escalonamentod;
 	TButton *rotacaoHomo;
 	TRadioGroup *Eixo;
+	TPageControl *PageControl;
+	TTabSheet *TabSheet1;
+	TTabSheet *TabSheet2;
+	TRadioGroup *RadioGroup_TipoCurva;
+	TButton *Curva;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);
@@ -80,6 +85,7 @@ __published:	// IDE-managed Components
 	void __fastcall EscalonamentoClick(TObject *Sender);
 	void __fastcall rotacaoHomoClick(TObject *Sender);
 	void __fastcall ReflexaoClick(TObject *Sender);
+	void __fastcall CurvaClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

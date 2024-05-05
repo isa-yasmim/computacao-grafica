@@ -458,3 +458,19 @@ void __fastcall TForm1::CircunferênciaClick(TObject *Sender)
 
 
 
+void __fastcall TForm1::CurvaClick(TObject *Sender)
+{
+
+	pol = display.poligonos[ListBox_Poligonos->ItemIndex].curva(RadioGroup_TipoCurva->ItemIndex);
+	if (pol.pontos.size() > 0) {
+		pol.id = contId++;
+		pol.tipo = 'V';
+		display.poligonos.push_back(pol);
+	}
+	pol.pontos.clear();
+
+	display.desenha(Form1->Image1->Canvas, mundo, vp, 0);
+	display.mostra(ListBox_Poligonos);
+}
+//---------------------------------------------------------------------------
+

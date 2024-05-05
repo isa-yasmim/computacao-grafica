@@ -19,6 +19,7 @@ C = CIRCUNFERENCIA
 G = CIRCUNFERENCIA CLIPADA
 H = POLIGONO CLIPADO
 P = PARAMETROS
+V = CURVE
 */
 
 //---------------------------------------------------------------------------
@@ -69,6 +70,19 @@ class Poligono{
 		void quadrantes(double xc, double yc, double x, double y);
 
 		Ponto pontoCentral(Ponto pc);
+
+		//CURVA
+
+		Poligono curva(int tipoCurva);
+
+		Poligono bSpline();
+
+		Poligono hermite();
+
+		Poligono bezier();
+
+		Poligono casteljau();
+		void casteljauB(Ponto P1, Ponto P2, Ponto P3, Poligono *aux);
 
 };
 #endif
