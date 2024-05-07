@@ -9,6 +9,7 @@ Util util;
 
 Ponto aux;
 Poligono pol;
+PontoD auxD;
 DisplayFile display;
 
 Janela mundo(-250,-250,250,250);
@@ -125,7 +126,13 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 void __fastcall TForm1::ListBox_PoligonosClick(TObject *Sender)
 {
-	display.poligonos[ListBox_Poligonos->ItemIndex].mostraPontos(ListBox_Pontos);
+	if (display.poligonos[ListBox_Poligonos->ItemIndex].tipo != 'D'){
+		display.poligonos[ListBox_Poligonos->ItemIndex].mostraPontos(ListBox_Pontos);
+	}
+
+	if (display.poligonos[ListBox_Poligonos->ItemIndex].tipo == 'D') {
+		display.poligonos[ListBox_Poligonos->ItemIndex].mostraPontosD(ListBox_Pontos);
+	}
 }
 //---------------------------------------------------------------------------
 
@@ -213,8 +220,8 @@ void TForm1::atualizaMundo(Janela mundo){
 void __fastcall TForm1::upClick(TObject *Sender)
 {
 	//set coordinates up
-	mundo.yMin -= 10;
-	mundo.yMax -= 10;
+	mundo.yMin += 10;
+	mundo.yMax += 10;
 
 	atualizaMundo(mundo);
 
@@ -250,8 +257,8 @@ void __fastcall TForm1::rightClick(TObject *Sender)
 void __fastcall TForm1::downClick(TObject *Sender)
 {
 	//set coordinates down
-	mundo.yMin += 10;
-	mundo.yMax += 10;
+	mundo.yMin -= 10;
+	mundo.yMax -= 10;
 
 	atualizaMundo(mundo);
 
@@ -342,7 +349,7 @@ void __fastcall TForm1::EscalonamentoClick(TObject *Sender)
 		return;
 	}
 
-    if (ListBox_Poligonos->ItemIndex == -1) {
+	if (ListBox_Poligonos->ItemIndex == -1) {
 		ShowMessage("Nenhum Poligono selecionado");
         return;
 	}
@@ -351,7 +358,7 @@ void __fastcall TForm1::EscalonamentoClick(TObject *Sender)
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
-    display.mostra(Form1->ListBox_Poligonos);
+	display.mostra(Form1->ListBox_Poligonos);
 
 }
 //---------------------------------------------------------------------------
@@ -389,7 +396,6 @@ void __fastcall TForm1::RotaçãoClick(TObject *Sender)
 void __fastcall TForm1::rotacaoHomoClick(TObject *Sender)
 {
 	double an = 0;
-
 
 	/*if (util.validate(ListBox_Poligonos, angulo, an)) {
 		display.poligonos[ListBox_Poligonos->ItemIndex].rotacaoH(an);
@@ -471,6 +477,116 @@ void __fastcall TForm1::CurvaClick(TObject *Sender)
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, 0);
 	display.mostra(ListBox_Poligonos);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::TranslacaodClick(TObject *Sender)
+{
+	double x, y;
+
+	try {
+		x = StrToFloat(dx->Text);
+		y = StrToFloat(dy->Text);
+	} catch (...) {
+		ShowMessage("Erro ao converter para float");
+		return;
+	}
+
+	if (ListBox_Poligonos->ItemIndex == -1) {
+		ShowMessage("Nenhum Poligono selecionado");
+		return;
+	}
+
+	display.poligonos[ListBox_Poligonos->ItemIndex].translacaoD(x, y);
+
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+
+	display.mostra(Form1->ListBox_Poligonos);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::EscalonamentodClick(TObject *Sender)
+{
+	double x, y;
+
+	try {
+		x = StrToFloat(dx->Text);
+		y = StrToFloat(dy->Text);
+	} catch (...) {
+		ShowMessage("Erro ao converter para float");
+		return;
+	}
+
+	if (ListBox_Poligonos->ItemIndex == -1) {
+		ShowMessage("Nenhum Poligono selecionado");
+		return;
+	}
+
+	display.poligonos[ListBox_Poligonos->ItemIndex].escalonamentoD(x, y);
+
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+
+	display.mostra(Form1->ListBox_Poligonos);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::PiramideClick(TObject *Sender)
+{
+	FILE *arquivo;
+
+    //c builder compiles in debug folder so add ../../ to return to the main directory
+	arquivo = fopen("../../help.txt", "r");
+
+    if (arquivo == nullptr) {
+		ShowMessage("Arquivo nao existe");
+	}
+	else {
+		while (fscanf(arquivo, "%lf %lf %lf", &auxD.x, &auxD.y, &auxD.z) == 3) {
+			pol.pontosD.push_back(auxD);
+		}
+
+		fclose(arquivo);
+    }
+
+    pol.id = contId++;
+	pol.tipo = 'D';
+	display.poligonos.push_back(pol);
+	pol.pontosD.clear();
+
+    display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+
+	display.mostra(Form1->ListBox_Poligonos);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::CuboClick(TObject *Sender)
+{
+
+	FILE *arquivo;
+
+	arquivo = fopen("../../cubo.txt", "r");
+
+    if (arquivo == nullptr) {
+		ShowMessage("Arquivo nao existe");
+	}
+	else {
+		while (fscanf(arquivo, "%lf %lf %lf", &auxD.x, &auxD.y, &auxD.z) == 3) {
+			pol.pontosD.push_back(auxD);
+		}
+
+		fclose(arquivo);
+    }
+
+    pol.id = contId++;
+	pol.tipo = 'D';
+	display.poligonos.push_back(pol);
+	pol.pontosD.clear();
+
+    display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+
+	display.mostra(Form1->ListBox_Poligonos);
 }
 //---------------------------------------------------------------------------
 

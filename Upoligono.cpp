@@ -256,10 +256,14 @@ Poligono Poligono::CohenSutherland(Janela c){
 				p2.clipLine(c, m, code2);
 			  }
 
-			  clippedPoints.push_back(p1);
+			  if (p1.getRegionCode(c) == 0) {
+				clippedPoints.push_back(p1);
+			  }
 
 			  if (p1.x != p2.x && p1.y != p2.y) {
-				clippedPoints.push_back(p2);
+				if (p2.getRegionCode(c) == 0) {
+					clippedPoints.push_back(p2);
+				}
 			  }
 		}
 	  }
@@ -284,7 +288,13 @@ Poligono Poligono::clipCircunferencia(Janela c){
 }
 
 void Poligono::mostra(TListBox *listbox){
-	listbox->Items->Add(IntToStr(id) + " - " + tipo + " - " + IntToStr((int)pontos.size()));
+	if (pontos.size() > 0) {
+		listbox->Items->Add(IntToStr(id) + " - " + tipo + " - " + IntToStr((int)pontos.size()));
+	}
+
+	if (pontosD.size() > 0) {
+		listbox->Items->Add(IntToStr(id) + " - " + tipo + " - " + IntToStr((int)pontosD.size()));
+	}
 }
 
 void Poligono::mostraPontos(TListBox *listbox){
@@ -294,6 +304,17 @@ void Poligono::mostraPontos(TListBox *listbox){
 	for (int i = 0; i < pontos.size(); i++) {
 		listbox->Items->Add(pontos[i].mostraPonto());
 	}
+
+}
+
+void Poligono::mostraPontosD(TListBox *listbox){
+
+	listbox->Items->Clear();
+
+	for (int i = 0; i < pontosD.size(); i++) {
+		listbox->Items->Add(pontosD[i].mostraPontoD());
+	}
+
 }
 
 void Poligono::translacao(double dx, double dy){
@@ -331,6 +352,18 @@ void Poligono::reflexao(TRadioGroup *Eixo){
 		pontos[i].reflexao(Eixo);
 	}
 
+}
+
+void Poligono::translacaoD(double dx, double dy){
+    for (int i = 0; i < pontos.size(); i++) {
+		pontosD[i].translacaoD(dx, dy);
+	}
+}
+
+void Poligono::escalonamentoD(double dx, double dy){
+    for (int i = 0; i < pontos.size(); i++) {
+		pontosD[i].escalonamentoD(dx, dy);
+	}
 }
 
 bool Poligono::isEqual(Poligono pol){
@@ -400,24 +433,73 @@ Poligono Poligono::curva(int tipoCurva){
 }
 
 Poligono Poligono::bSpline(){
+
 	Ponto aux;
-	Poligono result;
+	Poligono res;
+
 	for(double t = 0; t < 1; t+= 0.01){
+
 		double t2 = t*t;
 		double t3 = t2*t;
+
 		aux.x = pontos[0].x + 4 * pontos[1].x + pontos[2].x -  pontos[0].x * t3 + 3 * pontos[1].x * t3 - 3 * pontos[2].x * t3 + pontos[3].x * t3 + 3 * pontos[0].x * t2 - 6 * pontos[1].x * t2 + 3 * pontos[2].x * t2 - 3 * pontos[0].x * t+ 3 * pontos[2].x * t;
 		aux.y = pontos[0].y + 4 * pontos[1].y + pontos[2].y -  pontos[0].y * t3 + 3 * pontos[1].y * t3 - 3 * pontos[2].y * t3 + pontos[3].y * t3 + 3 * pontos[0].y * t2 - 6 * pontos[1].y * t2 + 3 * pontos[2].y * t2 - 3 * pontos[0].y * t+ 3 * pontos[2].y * t;
 		aux.x /= 6;
 		aux.y /= 6;
-		result.pontos.push_back(aux);
+
+		res.pontos.push_back(aux);
 	}
-	return result;
+
+	return res;
+
 }
 
 Poligono Poligono::hermite(){
+
+	Ponto aux, r1, r4;
+	Poligono res;
+
+	r1.x = pontos[1].x - pontos[0].x;
+	r1.y = pontos[1].y - pontos[0].y;
+	r4.x = pontos[3].x - pontos[2].x;
+	r4.y = pontos[3].y - pontos[2].y;
+
+	for(double t = 0; t < 1; t+= 0.01){
+
+		double t2 = t*t;
+		double t3 = t2*t;
+
+		aux.x = pontos[0].x * (2 * t3 - 3 * t2* t+1) + pontos[3].x * (-2 * t3 + 3 * t2) + r1.x * (t3 -2 * t2 + t) + r4.x * (t3 - t2);
+		aux.y = pontos[0].y * (2 * t3 - 3 * t2* t+1) + pontos[3].y * (-2 * t3 + 3 * t2) + r1.y * (t3 -2 * t2 + t) + r4.y * (t3 - t2);
+
+		res.pontos.push_back(aux);
+	}
+
+	return res;
+
 }
 
 Poligono Poligono::bezier(){
+
+	Ponto aux;
+	Poligono res;
+
+	for(double t = 0; t < 1; t+= 0.01){
+
+		double t2 = t*t;
+		double t3 = t2*t;
+		double u = 1-t;
+		double u2 = u*u;
+		double u3 = u2*u;
+
+		aux.x = u3 * pontos[0].x + 3 * u2 * t * pontos[1].x + 3 * u * t2 * pontos[2].x + t3 * pontos[3].x;
+		aux.y = u3 * pontos[0].y + 3 * u2 * t * pontos[1].y + 3 * u * t2 * pontos[2].y + t3 * pontos[3].y;
+
+		res.pontos.push_back(aux);
+	}
+
+	return res;
+
 }
 
 Poligono Poligono::casteljau() {
@@ -470,3 +552,4 @@ void Poligono::casteljauB(Ponto P1, Ponto P2, Ponto P3, Poligono *aux){
     }
 
 }
+

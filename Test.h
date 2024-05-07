@@ -14,6 +14,8 @@
 #include "Upoligono.h"
 #include "UdisplayFile.h"
 #include <Vcl.ComCtrls.hpp>
+#include <iostream>
+#include <fstream>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -55,7 +57,6 @@ __published:	// IDE-managed Components
 	TEdit *dx;
 	TEdit *dy;
 	TEdit *dz;
-	TButton *Translacaod;
 	TButton *Escalonamentod;
 	TButton *rotacaoHomo;
 	TRadioGroup *Eixo;
@@ -64,6 +65,11 @@ __published:	// IDE-managed Components
 	TTabSheet *TabSheet2;
 	TRadioGroup *RadioGroup_TipoCurva;
 	TButton *Curva;
+	TButton *Translacaod;
+	TButton *Cubo;
+	TButton *Piramide;
+	TButton *Button4;
+	TEdit *anguloD;
 	void __fastcall FormDblClick(TObject *Sender);
 	void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall Button1Click(TObject *Sender);
@@ -86,6 +92,10 @@ __published:	// IDE-managed Components
 	void __fastcall rotacaoHomoClick(TObject *Sender);
 	void __fastcall ReflexaoClick(TObject *Sender);
 	void __fastcall CurvaClick(TObject *Sender);
+	void __fastcall TranslacaodClick(TObject *Sender);
+	void __fastcall EscalonamentodClick(TObject *Sender);
+	void __fastcall PiramideClick(TObject *Sender);
+	void __fastcall CuboClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

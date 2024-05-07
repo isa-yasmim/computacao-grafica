@@ -472,22 +472,9 @@
     TabOrder = 27
     Text = 'dz'
   end
-  object Translacaod: TButton
-    Left = 825
-    Top = 762
-    Width = 94
-    Height = 31
-    Margins.Left = 4
-    Margins.Top = 4
-    Margins.Right = 4
-    Margins.Bottom = 4
-    Caption = 'Translacao'
-    DisabledImageName = 'Translacaod'
-    TabOrder = 28
-  end
   object Escalonamentod: TButton
-    Left = 825
-    Top = 805
+    Left = 813
+    Top = 821
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -496,7 +483,8 @@
     Margins.Bottom = 4
     Caption = 'Escalonamento'
     DisabledImageName = 'Escalonamento'
-    TabOrder = 29
+    TabOrder = 28
+    OnClick = EscalonamentodClick
   end
   object rotacaoHomo: TButton
     Left = 272
@@ -509,7 +497,7 @@
     Margins.Bottom = 4
     Caption = 'Rota'#231#227'o Homo'
     DisabledImageName = 'rotacaoHomo'
-    TabOrder = 30
+    TabOrder = 29
     OnClick = rotacaoHomoClick
   end
   object Eixo: TRadioGroup
@@ -527,7 +515,7 @@
       'X'
       'Y'
       'XY')
-    TabOrder = 31
+    TabOrder = 30
   end
   object PageControl: TPageControl
     Left = 32
@@ -539,7 +527,7 @@
     Margins.Right = 4
     Margins.Bottom = 4
     ActivePage = TabSheet2
-    TabOrder = 32
+    TabOrder = 31
     object TabSheet1: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
@@ -602,7 +590,75 @@
     Margins.Bottom = 4
     Caption = 'Curva'
     DisabledImageName = 'Curva'
-    TabOrder = 33
+    TabOrder = 32
     OnClick = CurvaClick
+  end
+  object Translacaod: TButton
+    Left = 812
+    Top = 767
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Translacao'
+    DisabledImageName = 'Translacaod'
+    TabOrder = 33
+    OnClick = TranslacaodClick
+  end
+  object Cubo: TButton
+    Left = 938
+    Top = 847
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Cubo'
+    DisabledImageName = 'Cubo'
+    TabOrder = 34
+    OnClick = CuboClick
+  end
+  object Piramide: TButton
+    Left = 938
+    Top = 804
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Piramide'
+    DisabledImageName = 'Piramide'
+    TabOrder = 35
+    OnClick = PiramideClick
+  end
+  object Button4: TButton
+    Left = 813
+    Top = 878
+    Width = 94
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Caption = 'Rotacao'
+    DisabledImageName = 'Translacaod'
+    TabOrder = 36
+  end
+  object anguloD: TEdit
+    Left = 626
+    Top = 898
+    Width = 151
+    Height = 23
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ImeName = 'Japanese'
+    TabOrder = 37
+    Text = 'angulo'
   end
 end

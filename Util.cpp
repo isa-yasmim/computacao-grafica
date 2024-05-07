@@ -6,15 +6,15 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-float Util::media(Ponto p1, Ponto p2){
+double Util::media(Ponto p1, Ponto p2){
 
-	float res = 1;
+	double res = 1;
 
 	if (p2.x - p1.x == 0 ) {
 		return res;
 	}
 
-	res = ((p2.y - p1.y) / (p2.x - p1.x));
+	res = ((p1.y - p2.y) / (p1.x - p2.x));
 
 	return res;
 }

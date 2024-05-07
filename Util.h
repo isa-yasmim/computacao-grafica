@@ -13,7 +13,7 @@ class Util {
 
 		static int polId;
 
-		float media(Ponto p1, Ponto p2);
+		double media(Ponto p1, Ponto p2);
 
 		double sign(double a);
 

@@ -81,6 +81,7 @@ void DisplayFile::clipping(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
 		if (poligonos[i].tipo != 'H' && poligonos[i].tipo != 'G' && poligonos[i].tipo != 'N') {
 
 				aux = poligonos[i].clipCircunferencia(c);
+				//aux = poligonos[i].CohenSutherland(c);
 
 			if (aux.pontos.size() > 0) {
 				poligonosAux.push_back(aux);
@@ -154,3 +155,4 @@ void DisplayFile::eixo(TCanvas *canvas, Janela mundo, Janela vp, Janela c){
 	poligonos.push_back(pol);
 	pol.pontos.clear();
 }
+

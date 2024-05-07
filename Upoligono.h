@@ -4,6 +4,7 @@
 #define UpoligonoH
 
 #include "Uponto.h"
+#include "UpontoD.h"
 #include "Util.h"
 #include <vector>
 #include <Vcl.ExtCtrls.hpp>
@@ -20,6 +21,7 @@ G = CIRCUNFERENCIA CLIPADA
 H = POLIGONO CLIPADO
 P = PARAMETROS
 V = CURVE
+D = PONTOS 3D
 */
 
 //---------------------------------------------------------------------------
@@ -28,6 +30,7 @@ class Poligono{
 		int id;
 		char tipo;
 		std::vector<Ponto> pontos;
+        std::vector<PontoD> pontosD;
 
         //DESENHA
 		void desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta);
@@ -52,6 +55,7 @@ class Poligono{
 		void mostra(TListBox *listbox);
 
 		void mostraPontos(TListBox *listbox);
+		void mostraPontosD(TListBox *listbox);
 
 		//TRANSFORMACOES
 		void translacao(double dx, double dy);
@@ -63,6 +67,13 @@ class Poligono{
 		void rotacaoH(double angulo);
 
 		void reflexao(TRadioGroup *Eixo);
+
+		//3D
+		void translacaoD(double dx, double dy);
+
+		void escalonamentoD(double dx, double dy);
+
+		void rotacaoD(double angulo, char eixo);
 
         //GERAIS
 		bool isEqual(Poligono pol);
