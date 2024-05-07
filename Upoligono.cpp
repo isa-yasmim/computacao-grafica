@@ -490,6 +490,7 @@ Poligono Poligono::bSpline(){
 
 Poligono Poligono::hermite(){
 
+	/*
 	Ponto aux, r1, r4;
 	Poligono res;
 
@@ -510,6 +511,68 @@ Poligono Poligono::hermite(){
 	}
 
 	return res;
+	*/
+	Poligono res;
+	Ponto aux;
+
+	Ponto r1, r4;
+	double t = 0;
+
+	r1.x = pontos[1].x - pontos[0].x;
+	r1.y = pontos[1].y - pontos[0].y;
+	r4.x = pontos[3].x - pontos[2].x;
+	r4.y = pontos[3].y - pontos[2].y;
+
+	double mh[4][4] = {
+		{2, -2, 1, 1},
+		{-3, 3, -2, -1},
+		{0, 0, 1, 0},
+		{1, 0, 0, 0}
+	};
+
+	double ghx[4][1] = {
+		{pontos[0].x},
+		{pontos[3].x},
+		{r1.x},
+		{r4.x}
+	};
+	double ghy[4][1] = {
+		{pontos[0].y},
+		{pontos[3].y},
+		{r1.y},
+		{r4.y}
+	};
+
+	double resx[4][1];
+	double resy[4][1];
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			resx[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				resx[i][j] += mh[i][k] * ghx[k][j];
+			}
+		}
+	}
+
+    for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			resy[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				resy[i][j] += mh[i][k] * ghy[k][j];
+			}
+		}
+	}
+
+	for (t = 0; t <= 1; t += 0.01) {
+
+		aux.x = resx[0][0] * (t*t*t) + resx[1][0] * (t*t) + resx[2][0] * t + resx[3][0];
+		aux.y = resy[0][0] * (t*t*t) + resy[1][0] * (t*t) + resy[2][0] * t + resy[3][0];
+
+		res.pontos.push_back(aux);
+	}
+
+	return res;
 
 }
 
@@ -517,6 +580,8 @@ Poligono Poligono::bezier(){
 
 	Ponto aux;
 	Poligono res;
+
+    Ponto p1 = pontos[0], p2 = pontos[1], p3 = pontos[2], p4 = pontos[3];
 
 	for(double t = 0; t < 1; t+= 0.01){
 
@@ -526,13 +591,84 @@ Poligono Poligono::bezier(){
 		double u2 = u*u;
 		double u3 = u2*u;
 
-		aux.x = u3 * pontos[0].x + 3 * u2 * t * pontos[1].x + 3 * u * t2 * pontos[2].x + t3 * pontos[3].x;
-		aux.y = u3 * pontos[0].y + 3 * u2 * t * pontos[1].y + 3 * u * t2 * pontos[2].y + t3 * pontos[3].y;
+		aux.x = (p1.x * u3) + (p2.x *  3 * t * u2) + (p3.x * 3 * t2 * u) + (p4.x * t3);
+        aux.y = (p1.y * u3) + (p2.y *  3 * t * u2) + (p3.y * 3 * t2 * u) + (p4.y * t3);
 
 		res.pontos.push_back(aux);
 	}
 
 	return res;
+
+	/*
+	Poligono res;
+	Ponto aux;
+
+	Ponto r1, r4;
+	double t = 0;
+
+	r1.x = 3 * (pontos[1].x - pontos[0].x);
+	r1.y = 3 * (pontos[1].y - pontos[0].y);
+	r4.x = 3 * (pontos[3].x - pontos[2].x);
+	r4.y = 3 * (pontos[3].y - pontos[2].y);
+
+	double mb[4][4] = {
+		{-1, 3, -3, 1},
+		{3, -6, 3, 0},
+		{-3, 3, 0, 0},
+		{1, 0, 0, 0}
+	};
+
+	double ghx[4][1] = {
+		{pontos[0].x},
+		{pontos[1].x},
+		{pontos[2].x},
+		{pontos[3].x}
+	};
+	double ghy[4][1] = {
+		{pontos[0].y},
+		{pontos[1].y},
+		{pontos[2].y},
+		{pontos[3].y}
+	};
+
+	double resx[4][1];
+	double resy[4][1];
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			resx[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				resx[i][j] += mb[i][k] * ghx[k][j];
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			resy[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				resy[i][j] += mb[i][k] * ghy[k][j];
+			}
+		}
+	}
+
+	for (t = 0; t <= 1; t += 0.01) {
+
+		aux.x = resx[0][0] * ((1 - t) * (1 - t) * (1 - t)) +
+				resx[1][0] * ((3 * t) * ((1 - t) * (1 - t))) +
+				resx[2][0] * ((3 * (t*t)) * (1 - t)) +
+				resx[3][0] * (t*t*t);
+
+		aux.y = resy[0][0] * ((1 - t) * (1 - t) * (1 - t)) +
+				resy[1][0] * ((3 * t) * ((1 - t) * (1 - t))) +
+				resy[2][0] * ((3 * (t*t)) * (1 - t)) +
+				resy[3][0] * (t*t*t);
+
+		res.pontos.push_back(aux);
+	}
+
+	return res;
+    */
 
 }
 
@@ -550,7 +686,7 @@ Poligono Poligono::casteljau() {
 
 	casteljauB(P1, P2, P3, &aux);
 
-    return aux;
+	return aux;
 
 }
 
@@ -588,6 +724,7 @@ void Poligono::casteljauB(Ponto P1, Ponto P2, Ponto P3, Poligono *aux){
 }
 
 Poligono Poligono::fowardD(){
+    /*
 	Ponto aux;
 	Poligono res;
 
@@ -623,4 +760,103 @@ Poligono Poligono::fowardD(){
     }
 
 	return res;
+	*/
+
+	Ponto p1 = pontos[0], p2 = pontos[1], p3 = pontos[2], p4 = pontos[3];
+
+	Poligono res;
+	Ponto aux;
+
+	Ponto r1, r4;
+	double t = 0.01;
+
+	r1.x = p2.x - p1.x;
+	r1.y = p2.y - p1.y;
+	r4.x = p4.x - p3.x;
+	r4.y = p4.y - p3.y;
+
+	double mh[4][4] = {
+		{2, -2, 1, 1},
+		{-3, 3, -2, -1},
+		{0, 0, 1, 0},
+		{1, 0, 0, 0}
+	};
+
+	double ghx[4][1] = {
+		{p1.x},
+		{p4.x},
+		{r1.x},
+		{r4.x}
+	};
+	double ghy[4][1] = {
+		{p1.y},
+		{p4.y},
+		{r1.y},
+		{r4.y}
+	};
+
+	double resx[4][1];
+	double resy[4][1];
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			resx[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				resx[i][j] += mh[i][k] * ghx[k][j];
+			}
+		}
+	}
+
+    for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			resy[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				resy[i][j] += mh[i][k] * ghy[k][j];
+			}
+		}
+	}
+
+	double f[4][4] = {
+		{0, 0, 0, 1},
+		{(t*t*t), (t*t), t, 0},
+		{(6*t*t*t), (2*t*t), 0, 0},
+        {(6*t*t*t), 0, 0, 0}
+	};
+
+	double dx[4][1];
+	double dy[4][1];
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1; j++) {
+			dx[i][j] = 0;
+			dy[i][j] = 0;
+			for (int k = 0; k < 4; k++) {
+				dx[i][j] += f[i][k] * resx[k][j];
+				dy[i][j] += f[i][k] * resy[k][j];
+			}
+		}
+	}
+
+
+	double x = p1.x;
+	double y = p1.y;
+	res.pontos.push_back(Ponto(x,y));
+
+	double i = t;
+	while (i < 1){
+		i += t;
+		x += dx[1][0];
+		y += dy[1][0];
+
+		dx[1][0] += dx[2][0];
+		dy[1][0] += dy[2][0];
+
+		dx[2][0] += dx[3][0];
+		dy[2][0] += dy[3][0];
+
+		res.pontos.push_back(Ponto(x,y));
+	}
+
+	return res;
+
 }
