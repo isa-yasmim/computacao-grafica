@@ -14,6 +14,9 @@ void Poligono::desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta){
 		desenhaC(Canvas, mundo, vp);
         return;
 	}
+	if (tipo == 'D') {
+        desenhaLine(Canvas, mundo, vp);
+	}
 
 	//LineTo
 	if (tipoReta == 0) {
@@ -32,33 +35,38 @@ void Poligono::desenha(TCanvas *Canvas, Janela mundo, Janela vp, int tipoReta){
 void Poligono::desenhaLine(TCanvas *Canvas, Janela mundo, Janela vp){
 	int xvp, yvp;
 
-		for (int i = 0; i < pontos.size(); i++) {
+		if (pontos.size() > 0) {
+			for (int i = 0; i < pontos.size(); i++) {
 
-			//converte cordenada de mundo para vp
-			xvp = pontos[i].xWVp(mundo, vp);
-			yvp = pontos[i].yWVp(mundo, vp);
+				//converte cordenada de mundo para vp
+				xvp = pontos[i].xWVp(mundo, vp);
+				yvp = pontos[i].yWVp(mundo, vp);
 
-			if (i == 0) {
-				Canvas->MoveTo(xvp, yvp);
+				if (i == 0) {
+					Canvas->MoveTo(xvp, yvp);
+				}
+				else {
+					Canvas->LineTo(xvp, yvp);
+				}
 			}
-			else {
-				Canvas->LineTo(xvp, yvp);
+		}
+
+		if (pontosD.size() > 0) {
+			for (int i = 0; i < pontosD.size(); i++) {
+
+				//converte cordenada de mundo para vp
+				xvp = pontosD[i].xWVp(mundo, vp);
+				yvp = pontosD[i].yWVp(mundo, vp);
+
+				if (i == 0) {
+					Canvas->MoveTo(xvp, yvp);
+				}
+				else {
+					Canvas->LineTo(xvp, yvp);
+				}
 			}
 		}
 
-		for (int i = 0; i < pontosD.size(); i++) {
-
-			//converte cordenada de mundo para vp
-			xvp = pontosD[i].xWVp(mundo, vp);
-			yvp = pontosD[i].yWVp(mundo, vp);
-
-			if (i == 0) {
-				Canvas->MoveTo(xvp, yvp);
-			}
-			else {
-				Canvas->LineTo(xvp, yvp);
-			}
-		}
 }
 
 void Poligono::desenhaDDA(TCanvas *Canvas, Janela mundo, Janela vp){
