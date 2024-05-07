@@ -96,6 +96,7 @@ __published:	// IDE-managed Components
 	void __fastcall EscalonamentodClick(TObject *Sender);
 	void __fastcall PiramideClick(TObject *Sender);
 	void __fastcall CuboClick(TObject *Sender);
+	void __fastcall Button4Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

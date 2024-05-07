@@ -69,9 +69,9 @@ class Poligono{
 		void reflexao(TRadioGroup *Eixo);
 
 		//3D
-		void translacaoD(double dx, double dy);
+		void translacaoD(double dx, double dy, double dz);
 
-		void escalonamentoD(double dx, double dy);
+		void escalonamentoD(double dx, double dy, double dz);
 
 		void rotacaoD(double angulo, char eixo);
 
@@ -94,6 +94,8 @@ class Poligono{
 
 		Poligono casteljau();
 		void casteljauB(Ponto P1, Ponto P2, Ponto P3, Poligono *aux);
+
+        Poligono fowardD();
 
 };
 #endif

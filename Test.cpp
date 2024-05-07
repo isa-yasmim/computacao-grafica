@@ -367,7 +367,7 @@ void __fastcall TForm1::RotaçãoClick(TObject *Sender)
 	double an = 0;
 
 	/*if (util.validate(ListBox_Poligonos, angulo, an)){
-    	display.poligonos[ListBox_Poligonos->ItemIndex].rotacao(an);
+		display.poligonos[ListBox_Poligonos->ItemIndex].rotacao(an);
 
 		display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 	}*/
@@ -379,7 +379,7 @@ void __fastcall TForm1::RotaçãoClick(TObject *Sender)
 		return;
 	}
 
-    if (ListBox_Poligonos->ItemIndex == -1) {
+	if (ListBox_Poligonos->ItemIndex == -1) {
 		ShowMessage("Nenhum Poligono selecionado");
         return;
 	}
@@ -388,7 +388,7 @@ void __fastcall TForm1::RotaçãoClick(TObject *Sender)
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
-    display.mostra(Form1->ListBox_Poligonos);
+	display.mostra(Form1->ListBox_Poligonos);
 
 }
 //---------------------------------------------------------------------------
@@ -482,11 +482,12 @@ void __fastcall TForm1::CurvaClick(TObject *Sender)
 
 void __fastcall TForm1::TranslacaodClick(TObject *Sender)
 {
-	double x, y;
+	double x, y, z;
 
 	try {
 		x = StrToFloat(dx->Text);
 		y = StrToFloat(dy->Text);
+		z = StrToFloat(dz->Text);
 	} catch (...) {
 		ShowMessage("Erro ao converter para float");
 		return;
@@ -497,7 +498,7 @@ void __fastcall TForm1::TranslacaodClick(TObject *Sender)
 		return;
 	}
 
-	display.poligonos[ListBox_Poligonos->ItemIndex].translacaoD(x, y);
+	display.poligonos[ListBox_Poligonos->ItemIndex].translacaoD(x, y, z);
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
@@ -508,11 +509,12 @@ void __fastcall TForm1::TranslacaodClick(TObject *Sender)
 
 void __fastcall TForm1::EscalonamentodClick(TObject *Sender)
 {
-	double x, y;
+	double x, y, z;
 
 	try {
 		x = StrToFloat(dx->Text);
 		y = StrToFloat(dy->Text);
+		z = StrToFloat(dz->Text);
 	} catch (...) {
 		ShowMessage("Erro ao converter para float");
 		return;
@@ -523,7 +525,7 @@ void __fastcall TForm1::EscalonamentodClick(TObject *Sender)
 		return;
 	}
 
-	display.poligonos[ListBox_Poligonos->ItemIndex].escalonamentoD(x, y);
+	display.poligonos[ListBox_Poligonos->ItemIndex].escalonamentoD(x, y, z);
 
 	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
@@ -585,6 +587,38 @@ void __fastcall TForm1::CuboClick(TObject *Sender)
 	pol.pontosD.clear();
 
     display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
+
+	display.mostra(Form1->ListBox_Poligonos);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button4Click(TObject *Sender)
+{
+	double an = 0;
+	char eixo = 'X';
+
+	if (Eixo->ItemIndex == 1){
+		eixo = 'Y';
+	}
+	if (Eixo->ItemIndex == 2){
+		eixo = 'Z';
+	}
+
+	try {
+		an = StrToFloat(angulo->Text);
+	} catch (...) {
+		ShowMessage("Erro ao converter para float");
+		return;
+	}
+
+	if (ListBox_Poligonos->ItemIndex == -1) {
+		ShowMessage("Nenhum Poligono selecionado");
+        return;
+	}
+
+	display.poligonos[ListBox_Poligonos->ItemIndex].rotacaoD(an, eixo);
+
+	display.desenha(Form1->Image1->Canvas, mundo, vp, RadioGroup_TipoReta->ItemIndex);
 
 	display.mostra(Form1->ListBox_Poligonos);
 }

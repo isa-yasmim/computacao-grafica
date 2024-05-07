@@ -5,6 +5,7 @@
 //---------------------------------------------------------------------------
 #include "Uponto.h"
 #include <Vcl.Controls.hpp>
+#include <cmath>
 class PontoD : public Ponto {
 	public:
 		double z;
@@ -17,10 +18,10 @@ class PontoD : public Ponto {
 		AnsiString mostraPontoD();
 
 		//GEOMETRIC FUNCTIONS
-		void translacaoD(double dx, double dy);
+		void translacaoD(double dx, double dy, double dz);
 
-		void escalonamentoD(double dx, double dy);
+		void escalonamentoD(double dx, double dy, double dz);
 
-		void rotacaoD(double angulo);
+		void rotacaoD(double angulo, char eixo);
 };
 #endif

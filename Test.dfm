@@ -574,7 +574,8 @@
           'B-Spline'
           'Hermite'
           'Brezier'
-          'Casteljau')
+          'Casteljau'
+          'Foward')
         TabOrder = 0
       end
     end
@@ -608,7 +609,7 @@
     OnClick = TranslacaodClick
   end
   object Cubo: TButton
-    Left = 938
+    Left = 927
     Top = 847
     Width = 94
     Height = 31
@@ -622,7 +623,7 @@
     OnClick = CuboClick
   end
   object Piramide: TButton
-    Left = 938
+    Left = 927
     Top = 804
     Width = 94
     Height = 31
@@ -647,6 +648,7 @@
     Caption = 'Rotacao'
     DisabledImageName = 'Translacaod'
     TabOrder = 36
+    OnClick = Button4Click
   end
   object anguloD: TEdit
     Left = 626

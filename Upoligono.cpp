@@ -45,6 +45,20 @@ void Poligono::desenhaLine(TCanvas *Canvas, Janela mundo, Janela vp){
 				Canvas->LineTo(xvp, yvp);
 			}
 		}
+
+		for (int i = 0; i < pontosD.size(); i++) {
+
+			//converte cordenada de mundo para vp
+			xvp = pontosD[i].xWVp(mundo, vp);
+			yvp = pontosD[i].yWVp(mundo, vp);
+
+			if (i == 0) {
+				Canvas->MoveTo(xvp, yvp);
+			}
+			else {
+				Canvas->LineTo(xvp, yvp);
+			}
+		}
 }
 
 void Poligono::desenhaDDA(TCanvas *Canvas, Janela mundo, Janela vp){
@@ -354,15 +368,21 @@ void Poligono::reflexao(TRadioGroup *Eixo){
 
 }
 
-void Poligono::translacaoD(double dx, double dy){
-    for (int i = 0; i < pontos.size(); i++) {
-		pontosD[i].translacaoD(dx, dy);
+void Poligono::translacaoD(double dx, double dy, double dz){
+	for (int i = 0; i < pontosD.size(); i++) {
+		pontosD[i].translacaoD(dx, dy, dz);
 	}
 }
 
-void Poligono::escalonamentoD(double dx, double dy){
-    for (int i = 0; i < pontos.size(); i++) {
-		pontosD[i].escalonamentoD(dx, dy);
+void Poligono::escalonamentoD(double dx, double dy, double dz){
+	for (int i = 0; i < pontosD.size(); i++) {
+		pontosD[i].escalonamentoD(dx, dy, dz);
+	}
+}
+
+void Poligono::rotacaoD(double angulo, char eixo){
+	for (int i = 0; i < pontosD.size(); i++) {
+		pontosD[i].rotacaoD(angulo, eixo);
 	}
 }
 
@@ -425,6 +445,12 @@ Poligono Poligono::curva(int tipoCurva){
 	if (tipoCurva == 3) {
 		if (pontos.size() == 3) {
 			pol = casteljau();
+		}
+		return pol;
+	}
+	if (tipoCurva == 4) {
+		if (pontos.size() == 4) {
+			pol = fowardD();
 		}
 		return pol;
 	}
@@ -553,3 +579,40 @@ void Poligono::casteljauB(Ponto P1, Ponto P2, Ponto P3, Poligono *aux){
 
 }
 
+Poligono Poligono::fowardD(){
+	Ponto aux;
+	Poligono res;
+
+    double h = 0.0001;
+
+    for(double t = 0; t < 1; t+= 0.01){
+
+        double t2 = t*t;
+        double t3 = t2*t;
+        double u = 1-t;
+        double u2 = u*u;
+        double u3 = u2*u;
+
+        aux.x = u3 * pontos[0].x + 3 * u2 * t * pontos[1].x + 3 * u * t2 * pontos[2].x + t3 * pontos[3].x;
+        aux.y = u3 * pontos[0].y + 3 * u2 * t * pontos[1].y + 3 * u * t2 * pontos[2].y + t3 * pontos[3].y;
+
+        double t_plus_h = t + h;
+        double t2_plus_h = t_plus_h * t_plus_h;
+        double t3_plus_h = t2_plus_h * t_plus_h;
+        double u_plus_h = 1 - t_plus_h;
+        double u2_plus_h = u_plus_h * u_plus_h;
+        double u3_plus_h = u2_plus_h * u_plus_h;
+
+        Ponto aux_plus_h;
+		aux_plus_h.x = u3_plus_h * pontos[0].x + 3 * u2_plus_h * (t_plus_h) * pontos[1].x + 3 * u_plus_h * (t2_plus_h) * pontos[2].x + (t3_plus_h) * pontos[3].x;
+        aux_plus_h.y = u3_plus_h * pontos[0].y + 3 * u2_plus_h * (t_plus_h) * pontos[1].y + 3 * u_plus_h * (t2_plus_h) * pontos[2].y + (t3_plus_h) * pontos[3].y;
+
+        Ponto derivative;
+        derivative.x = (aux_plus_h.x - aux.x) / h;
+        derivative.y = (aux_plus_h.y - aux.y) / h;
+
+        res.pontos.push_back(derivative);
+    }
+
+	return res;
+}
